@@ -100,6 +100,43 @@ namespace qh
     {
 #if 1
         //TODO 请面试者在这里添加自己的代码实现以完成所需功能
+        std::string tmp_url = raw_url;
+		s32 index = tmp_url.find_first_of("?");
+		while (std::string::npos != index)
+		{
+			tmp_url.erase(0, index + 1);
+			index = tmp_url.find_first_of("?");
+		}
+
+		sub_url = "";
+		if (tmp_url.find("=") == std::string::npos)
+		{
+			return;
+		}
+
+		std::vector<std::string> vecParams;
+		StringSplit(tmp_url, "&", 0xffffffff, vecParams);
+
+		if (vecParams.size() == 0)
+		{
+			return;
+		}
+		
+		std::vector<std::string>::iterator it;
+		for (it = vecParams.begin(); it != vecParams.end(); it++)
+		{
+			std::vector<std::string> vecKeyValue;
+			StringSplit(*it, "=", 2, vecKeyValue);
+			if (keys.find(vecKeyValue[0]) != keys.end() )
+			{
+				if(vecKeyValue.size() > 1)
+				{
+					sub_url = vecKeyValue[1];
+				}
+			}
+
+		}
+
 #else
         //这是一份参考实现，但在特殊情况下工作不能符合预期
         Tokener token(raw_url);
