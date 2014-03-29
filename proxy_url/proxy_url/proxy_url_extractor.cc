@@ -100,12 +100,11 @@ namespace qh
     {
 #if 1
         //TODO 请面试者在这里添加自己的代码实现以完成所需功能
-        std::string tmp_url = raw_url;
+    std::string tmp_url = raw_url;
 		s32 index = tmp_url.find_first_of("?");
-		while (std::string::npos != index)
+		if (std::string::npos != index)
 		{
 			tmp_url.erase(0, index + 1);
-			index = tmp_url.find_first_of("?");
 		}
 
 		sub_url = "";
@@ -132,6 +131,7 @@ namespace qh
 				if(vecKeyValue.size() > 1)
 				{
 					sub_url = vecKeyValue[1];
+					break;
 				}
 			}
 

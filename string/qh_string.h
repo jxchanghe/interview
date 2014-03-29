@@ -24,7 +24,7 @@ namespace qh
         const char* c_str() const;
 
         // set & get
-        char* operator[](size_t index);
+        char& operator[](size_t index);
 
     private:
         char*  data_;
