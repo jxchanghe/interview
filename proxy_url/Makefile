@@ -1,4 +1,3 @@
-# weizili@360.cn 
 
 CC=gcc
 CXX=g++
